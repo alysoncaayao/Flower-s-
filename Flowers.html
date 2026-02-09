@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Daisy Bloom 🌼</title>
+
+<style>
+  body {
+    margin: 0;
+    background-color: #fff6e5; /* pastel cream */
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive;
+  }
+
+  .field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .daisy {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    transform: scale(0);
+    animation: bloom 3s ease-out forwards;
+  }
+
+  @keyframes bloom {
+    0% {
+      transform: scale(0);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  .petal {
+    position: absolute;
+    width: 14px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    top: 0;
+    left: 23px;
+    transform-origin: bottom center;
+    transform: scaleY(0);
+    animation: petalBloom 2.5s ease-out forwards;
+  }
+
+  @keyframes petalBloom {
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  .center {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: #f4c430;
+    border-radius: 50%;
+    top: 19px;
+    left: 19px;
+    transform: scale(0);
+    animation: centerBloom 1.5s ease-out forwards;
+    animation-delay: 1.2s;
+  }
+
+  @keyframes centerBloom {
+    to {
+      transform: scale(1);
+    }
+  }
+
+  .message {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 26px;
+    color: #444;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px 0;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="field" id="field"></div>
+
+<div class="message">
+  flowers for you, baby!!
+</div>
+
+<script>
+  const field = document.getElementById("field");
+  const flowerCount = 80;
+
+  for (let i = 0; i < flowerCount; i++) {
+    const daisy = document.createElement("div");
+    daisy.className = "daisy";
+
+    daisy.style.top = Math.random() * 100 + "vh";
+    daisy.style.left = Math.random() * 100 + "vw";
+    daisy.style.animationDelay = `${i * 0.08}s`;
+
+    const center = document.createElement("div");
+    center.className = "center";
+    daisy.appendChild(center);
+
+    for (let angle = 0; angle < 360; angle += 45) {
+      const petal = document.createElement("div");
+      petal.className = "petal";
+      petal.style.transform = `rotate(${angle}deg) scaleY(0)`;
+      petal.style.animationDelay = `${i * 0.08 + 0.4}s`;
+      daisy.appendChild(petal);
+    }
+
+    field.appendChild(daisy);
+  }
+</script>
+
+</body>
+</html>
